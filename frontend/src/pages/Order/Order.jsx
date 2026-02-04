@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import '../../styles/Order.css'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
+import '../../styles/mainStyles/Order.css'
+import MainLayout from '../../layouts/MainLayout'
 
 const Order = () => {
   const [currentStep, setCurrentStep] = useState(1)
@@ -126,9 +125,7 @@ const Order = () => {
   }
 
   return (
-    <div className="order-page">
-      <Header />
-      
+    <MainLayout>
       <div className="order-main">
         <div className="order-container">
           {/* Step 1: Device Selection */}
@@ -420,9 +417,7 @@ const Order = () => {
           )}
         </div>
       </div>
-
-      <Footer />
-    </div>
+    </MainLayout>
   )
 }
 

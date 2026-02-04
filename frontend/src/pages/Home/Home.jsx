@@ -1,47 +1,44 @@
-import '../../styles/Home.css'
+import '../../styles/mainStyles/Home.css'
 import { useNavigate } from 'react-router-dom'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import MainLayout from '../../layouts/MainLayout'
 
 function Home() {
   const navigate = useNavigate()
 
   const handleOrderClick = () => {
-    navigate('/Order')
+    navigate('/order')
   }
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-
-        <section className="py-16 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-white rounded-3xl shadow-lg p-8 lg:p-13">
-                <div className="flex flex-col lg:flex-row items-center">
-                    <div className="lg:w-1/2 lg:pr-10">
-                    <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Hợp lí - Nhanh chóng - Đáng tin
-                    </h1>
-                    <p className="text-lg text-gray-600 mb-8">
-                        Dành cho thiết bị điện tử của bạn
-                    </p>
-                    <button
-                    onClick ={handleOrderClick} 
-                    className="bg-custom-green hover:bg-custom-green-hover text-white px-20 py-3 rounded-lg text-lg font-medium transition duration-300">
-                        Đặt ngay
-                    </button>
-                    </div>
-                    
-                    <div className="lg:w-1/2 mt-12 lg:mt-0">
-                    <img
-                        src="/img/ani_0.gif"
-                        alt="Hero Image"
-                        className="w-full h-auto rounded-2xl shadow-lg"
-                    />
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
+    <MainLayout>
+      <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-white rounded-3xl shadow-lg p-8 lg:p-13">
+              <div className="flex flex-col lg:flex-row items-center">
+                  <div className="lg:w-1/2 lg:pr-10">
+                  <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                      Hợp lí - Nhanh chóng - Đáng tin
+                  </h1>
+                  <p className="text-lg text-gray-600 mb-8">
+                      Dành cho thiết bị điện tử của bạn
+                  </p>
+                  <button
+                  onClick ={handleOrderClick} 
+                  className="bg-custom-green hover:bg-custom-green-hover text-white px-20 py-3 rounded-lg text-lg font-medium transition duration-300">
+                      Đặt ngay
+                  </button>
+                  </div>
+                  
+                  <div className="lg:w-1/2 mt-12 lg:mt-0">
+                  <img
+                      src="/img/ani_0.gif"
+                      alt="Hero Image"
+                      className="w-full h-auto rounded-2xl shadow-lg"
+                  />
+                  </div>
+              </div>
+              </div>
+          </div>
+      </section>
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +46,7 @@ function Home() {
             <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
-                  src= "/img/ic_0.svg"
+                  src= "/icon/ic_0.svg"
                   alt = "Chuyên gia đáng tin"
                   className="w-12 h-12"
                 />
@@ -63,7 +60,7 @@ function Home() {
             <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
-                  src= "/img/ic_1.svg"
+                  src= "/icon/ic_1.svg"
                   alt = "Sửa chữa nhanh chóng"
                   className="w-12 h-12"
                 />
@@ -77,7 +74,7 @@ function Home() {
             <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
-                  src= "/img/ic_2.svg"
+                  src= "/icon/ic_2.svg"
                   alt = "Chẩn đoán miễn phí"
                   className="w-12 h-12"
                 />
@@ -176,9 +173,7 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </MainLayout>
   )
 }
 

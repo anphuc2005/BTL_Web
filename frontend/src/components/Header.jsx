@@ -1,10 +1,13 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 export default function Header() {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleOrderClick = () => {
     navigate('/order')
   }
+
+  const isActive = (path) => location.pathname === path
 
   return (
     <nav className="bg-gray-100 shadow-sm">
@@ -17,11 +20,11 @@ export default function Header() {
           </div>
           
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#" className="text-green-600 hover:text-green-700 px-3 py-2 text-sm font-medium">Home</a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">About</a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact us</a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">FAQs</a>
+            <div className="ml-10 flex items-baseline space-x-16">
+              <span onClick={() => navigate('/')} className={isActive('/') ? "text-green-600 hover:text-green-700 text-sm font-medium cursor-pointer" : "text-gray-700 hover:text-gray-900 text-sm font-medium cursor-pointer"}>Home</span>
+              <span onClick={() => navigate('/about')} className={isActive('/about') ? "text-green-600 hover:text-green-700 text-sm font-medium cursor-pointer" : "text-gray-700 hover:text-gray-900 text-sm font-medium cursor-pointer"}>About</span>
+              <span onClick={() => navigate('/product')} className={isActive('/product') ? "text-green-600 hover:text-green-700 text-sm font-medium cursor-pointer" : "text-gray-700 hover:text-gray-900 text-sm font-medium cursor-pointer"}>Product</span>
+              <span onClick={() => navigate('/faq')} className={isActive('/faq') ? "text-green-600 hover:text-green-700 text-sm font-medium cursor-pointer" : "text-gray-700 hover:text-gray-900 text-sm font-medium cursor-pointer"}>FAQs</span>
             </div>
           </div>
           

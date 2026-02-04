@@ -1,0 +1,9 @@
+.about-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-main {
+  flex: 1;
+}
