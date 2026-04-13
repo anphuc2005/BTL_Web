@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import '../../styles/mainStyles/Faq.css'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 
 const Faq = () => {
+  const navigate = useNavigate()
   const [expandedIndex, setExpandedIndex] = useState(0)
 
   const faqData = [
@@ -77,7 +79,9 @@ const Faq = () => {
             <p className="cta-description">
               Chúng tôi chỉ sử dụng các linh kiện chất lượng cao nhất và cung cấp nhiều dịch vụ sửa chữa. Từ thay thế màn hình độn giấn đến sửa chữa bo mạch chủ phức tạp. Chúng tôi cung cấp dịch vụ sửa chữa trong ngày trong hầu hết các trường hợp!
             </p>
-            <button className="cta-button">Liên hệ</button>
+            <button className="cta-button" onClick={() => navigate('/feedback')}>
+              Liên hệ
+              </button>
           </div>
         </div>
       </main>

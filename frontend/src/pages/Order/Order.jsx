@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../../styles/mainStyles/Order.css'
 import MainLayout from '../../layouts/MainLayout'
+import { orderAPI } from '../../services/api'
+
+const VIETNAM_LOCATION_API = 'https://provinces.open-api.vn/api/v2'
 
 const Order = () => {
   const [currentStep, setCurrentStep] = useState(1)
@@ -13,9 +16,46 @@ const Order = () => {
       name: '',
       phone: '',
       email: '',
-      address: ''
+      cityCode: '',
+      city: '',
+      wardCode: '',
+      ward: '',
+      addressDetail: ''
     }
   })
+  const [orderResult, setOrderResult] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [provinces, setProvinces] = useState([])
+  const [wards, setWards] = useState([])
+  const [locationLoading, setLocationLoading] = useState({
+    provinces: false,
+    wards: false,
+  })
+  const [locationError, setLocationError] = useState('')
+
+  useEffect(() => {
+    const loadProvinces = async () => {
+      setLocationLoading((prev) => ({ ...prev, provinces: true }))
+      setLocationError('')
+
+      try {
+        const response = await fetch(`${VIETNAM_LOCATION_API}/p/`)
+        if (!response.ok) {
+          throw new Error('Không thể tải danh sách tỉnh/thành phố')
+        }
+
+        const data = await response.json()
+        setProvinces(data)
+      } catch (err) {
+        setLocationError(err.message || 'Lỗi tải dữ liệu địa chỉ')
+      } finally {
+        setLocationLoading((prev) => ({ ...prev, provinces: false }))
+      }
+    }
+
+    loadProvinces()
+  }, [])
 
   const devices = [
     { 
@@ -87,10 +127,60 @@ const Order = () => {
     }
   }
 
-  const handleCustomerInfoSubmit = (e) => {
+  const handleCustomerInfoSubmit = async (e) => {
     e.preventDefault()
     setCurrentStep(4)
-    setTimeout(() => setCurrentStep(5), 2000)
+    setLoading(true)
+    setError(null)
+
+    try {
+      const fullAddress = [
+        formData.customerInfo.addressDetail,
+        formData.customerInfo.ward,
+        formData.customerInfo.city,
+      ].filter(Boolean).join(', ')
+
+      const orderData = {
+        orderType: 'repair-service',
+        repairInfo: {
+          deviceType: formData.deviceType,
+          issue: formData.issue,
+          issueDescription: formData.issueDescription || 'Không có mô tả',
+        },
+        orderItems: [],
+        customerInfo: {
+          name: formData.customerInfo.name,
+          email: formData.customerInfo.email || 'no-email@service.com',
+          phone: formData.customerInfo.phone
+        },
+        shippingAddress: {
+          fullName: formData.customerInfo.name,
+          address: fullAddress,
+          city: formData.customerInfo.city,
+          ward: formData.customerInfo.ward,
+          phoneNumber: formData.customerInfo.phone
+        },
+      }
+
+      // Gọi API tạo order
+      const response = await orderAPI.create(orderData)
+      
+      if (response.data && response.data.success) {
+        setOrderResult(response.data.data)
+        setTimeout(() => setCurrentStep(5), 1000)
+      } else {
+        throw new Error('Tạo đơn hàng thất bại')
+      }
+    } catch (err) {
+      console.error('Error creating order:', err)
+      setError(err.response?.data?.message || err.message || 'Có lỗi xảy ra khi tạo đơn hàng')
+      setTimeout(() => {
+        setCurrentStep(3) // Quay về form
+        setLoading(false)
+      }, 2000)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleInputChange = (field, value) => {
@@ -107,6 +197,55 @@ const Order = () => {
     }
   }
 
+  const handleCityChange = async (cityCode) => {
+    const selectedCity = provinces.find((city) => String(city.code) === cityCode)
+
+    setFormData((prev) => ({
+      ...prev,
+      customerInfo: {
+        ...prev.customerInfo,
+        cityCode,
+        city: selectedCity?.name || '',
+        wardCode: '',
+        ward: '',
+      },
+    }))
+
+    setWards([])
+
+    if (!cityCode) return
+
+    setLocationLoading((prev) => ({ ...prev, wards: true }))
+    setLocationError('')
+
+    try {
+      const response = await fetch(`${VIETNAM_LOCATION_API}/p/${cityCode}?depth=2`)
+      if (!response.ok) {
+        throw new Error('Không thể tải danh sách quận/huyện/xã')
+      }
+
+      const data = await response.json()
+      setWards(data.wards || [])
+    } catch (err) {
+      setLocationError(err.message || 'Lỗi tải dữ liệu quận/huyện/xã')
+    } finally {
+      setLocationLoading((prev) => ({ ...prev, wards: false }))
+    }
+  }
+
+  const handleWardChange = (wardCode) => {
+    const selectedWard = wards.find((ward) => String(ward.code) === wardCode)
+
+    setFormData((prev) => ({
+      ...prev,
+      customerInfo: {
+        ...prev.customerInfo,
+        wardCode,
+        ward: selectedWard?.name || '',
+      },
+    }))
+  }
+
   const goBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
@@ -120,8 +259,21 @@ const Order = () => {
       deviceModel: '',
       issue: '',
       issueDescription: '',
-      customerInfo: { name: '', phone: '', email: '', address: '' }
+      customerInfo: {
+        name: '',
+        phone: '',
+        email: '',
+        cityCode: '',
+        city: '',
+        wardCode: '',
+        ward: '',
+        addressDetail: '',
+      }
     })
+    setOrderResult(null)
+    setError(null)
+    setLoading(false)
+    setWards([])
   }
 
   return (
@@ -258,7 +410,7 @@ const Order = () => {
           {currentStep === 3 && (
             <div className="customer-info-section">
               <div className="section-header">
-                <h2 className="page-title">Nhập thông tin thiết bị của bạn</h2>
+                <h2 className="page-title">Nhập thông tin cá nhân của bạn</h2>
                 <p className="page-subtitle">Chúng tôi cần thông tin của bạn để có thể liên lạc và gửi báo giá cho bạn</p>
               </div>
               
@@ -300,16 +452,60 @@ const Order = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label-new">Địa chỉ</label>
+                    <label className="form-label-new">Tỉnh / Thành phố</label>
+                    <select
+                      required
+                      value={formData.customerInfo.cityCode}
+                      onChange={(e) => handleCityChange(e.target.value)}
+                      className="form-input-new"
+                      disabled={locationLoading.provinces}
+                    >
+                      <option value="">Chọn tỉnh / thành phố</option>
+                      {provinces.map((city) => (
+                        <option key={city.code} value={String(city.code)}>
+                          {city.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label-new">Quận / Huyện / Phường / Xã</label>
+                    <select
+                      required
+                      value={formData.customerInfo.wardCode}
+                      onChange={(e) => handleWardChange(e.target.value)}
+                      className="form-input-new"
+                      disabled={!formData.customerInfo.cityCode || locationLoading.wards}
+                    >
+                      <option value="">Chọn Quận/Huyện/Phường/Xã</option>
+                      {wards.map((ward) => (
+                        <option key={ward.code} value={String(ward.code)}>
+                          {ward.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label-new">Địa chỉ chi tiết</label>
                     <input
                       type="text"
-                      value={formData.customerInfo.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
+                      required
+                      value={formData.customerInfo.addressDetail}
+                      onChange={(e) => handleInputChange('addressDetail', e.target.value)}
                       className="form-input-new"
-                      placeholder="Nhập địa chỉ"
+                      placeholder="Số nhà, tên đường..."
                     />
                   </div>
                 </div>
+
+                {locationError && (
+                  <p className="page-subtitle" style={{ color: '#dc2626' }}>
+                    {locationError}
+                  </p>
+                )}
 
                 <div className="step-actions">
                   <button
@@ -337,8 +533,13 @@ const Order = () => {
                 <div className="processing-icon">
                   <div className="spinner"></div>
                 </div>
-                <h3 className="processing-title">Đợi một chút</h3>
-                <p className="processing-desc">Chúng tôi đang xử lý đơn hàng của bạn trong khi này</p>
+                <h3 className="processing-title">
+                  {loading ? 'Đợi một chút' : error ? 'Có lỗi xảy ra' : 'Hoàn tất!'}
+                </h3>
+                <p className="processing-desc">
+                  {loading ? 'Chúng tôi đang xử lý đơn hàng của bạn trong khi này' : 
+                   error ? error : 'Đơn hàng đã được tạo thành công!'}
+                </p>
               </div>
             </div>
           )}
@@ -365,7 +566,7 @@ const Order = () => {
                   <div className="summary-details">
                     <div className="summary-row">
                       <span className="summary-label">Mã đơn hàng:</span>
-                      <span className="summary-value">#DH001234</span>
+                      <span className="summary-value">#{orderResult?.orderNumber || 'ORD000001'}</span>
                     </div>
                     <div className="summary-row">
                       <span className="summary-label">Thiết bị:</span>
@@ -383,16 +584,32 @@ const Order = () => {
                       <span className="summary-label">SĐT:</span>
                       <span className="summary-value">{formData.customerInfo.phone}</span>
                     </div>
+                    <div className="summary-row">
+                      <span className="summary-label">Trạng thái:</span>
+                      <span className="summary-value">{orderResult?.status || 'pending'}</span>
+                    </div>
                     {formData.customerInfo.email && (
                       <div className="summary-row">
                         <span className="summary-label">Email:</span>
                         <span className="summary-value">{formData.customerInfo.email}</span>
                       </div>
                     )}
-                    {formData.customerInfo.address && (
+                    {formData.customerInfo.city && (
                       <div className="summary-row">
-                        <span className="summary-label">Địa chỉ:</span>
-                        <span className="summary-value">{formData.customerInfo.address}</span>
+                        <span className="summary-label">Tỉnh/Thành:</span>
+                        <span className="summary-value">{formData.customerInfo.city}</span>
+                      </div>
+                    )}
+                    {formData.customerInfo.ward && (
+                      <div className="summary-row">
+                        <span className="summary-label">Quận/Phường:</span>
+                        <span className="summary-value">{formData.customerInfo.ward}</span>
+                      </div>
+                    )}
+                    {formData.customerInfo.addressDetail && (
+                      <div className="summary-row">
+                        <span className="summary-label">Chi tiết:</span>
+                        <span className="summary-value">{formData.customerInfo.addressDetail}</span>
                       </div>
                     )}
                     {formData.issueDescription && (
@@ -407,9 +624,6 @@ const Order = () => {
                 <div className="success-actions">
                   <button className="btn-done" onClick={resetForm}>
                     Xong
-                  </button>
-                  <button className="btn-track">
-                    Theo dõi đơn hàng
                   </button>
                 </div>
               </div>

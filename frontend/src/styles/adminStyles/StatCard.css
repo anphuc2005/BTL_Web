@@ -1,0 +1,82 @@
+.statCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e9edf3;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  padding: 14px 16px;
+  min-height: 92px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.statCard--active {
+  outline: 3px solid rgba(139, 92, 246, 0.55); /* khung tím như mẫu */
+  outline-offset: 0px;
+}
+
+/* hàng trên: icon trái, meta phải */
+.statCard__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.statCard__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 20px;
+  flex: 0 0 auto;
+}
+
+.statCard__iconImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* meta căn phải như hình */
+.statCard__meta {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.statCard__title {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.statCard__value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-top: 6px;
+}
+
+/* hint nằm dưới, canh trái như mẫu */
+.statCard__hint {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #eef2f7;
+  font-size: 13px;
+}
+
+.statCard__hint--green { color: #16a34a; }
+.statCard__hint--blue { color: #2563eb; }
+.statCard__hint--gray { color: #94a3b8; }

@@ -11,7 +11,7 @@ function Home() {
   return (
     <MainLayout>
       <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ animation: 'fadeInUp 0.6s ease-out forwards' }}>
               <div className="bg-white rounded-3xl shadow-lg p-8 lg:p-13">
               <div className="flex flex-col lg:flex-row items-center">
                   <div className="lg:w-1/2 lg:pr-10">
@@ -43,7 +43,7 @@ function Home() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center" style={{ animation: 'fadeInUp 0.6s ease-out 0.1s forwards', opacity: 0 }}>
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
                   src= "/icon/ic_0.svg"
@@ -57,7 +57,7 @@ function Home() {
               </p>
             </div>
             
-            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s forwards', opacity: 0 }}>
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
                   src= "/icon/ic_1.svg"
@@ -71,7 +71,7 @@ function Home() {
               </p>
             </div>
             
-            <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+            <div className="bg-white rounded-2xl p-8 shadow-lg text-center" style={{ animation: 'fadeInUp 0.6s ease-out 0.3s forwards', opacity: 0 }}>
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <img
                   src= "/icon/ic_2.svg"
@@ -90,12 +90,12 @@ function Home() {
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12" style={{ animation: 'fadeInUp 0.6s ease-out 0.1s forwards', opacity: 0 }}>
             Các vấn đề hay gặp phải
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300">
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s forwards', opacity: 0 }}>
               <div className="w-32 h-32 mx-auto mb-6 rounded-2xl flex items-center justify-center">
                 <img
                     src="/img/ip_logo.jpg"
@@ -109,7 +109,7 @@ function Home() {
               </p>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300">
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300" style={{ animation: 'fadeInUp 0.6s ease-out 0.3s forwards', opacity: 0 }}>
               <div className="w-32 h-32 mx-auto mb-6 rounded-2xl flex items-center justify-center">
                 <img
                     src="/img/ipad_logo.jpg"
@@ -123,7 +123,7 @@ function Home() {
               </p>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300">
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300" style={{ animation: 'fadeInUp 0.6s ease-out 0.4s forwards', opacity: 0 }}>
               <div className="w-32 h-32 mx-auto mb-6 rounded-2xl flex items-center justify-center">
                 <img
                     src="/img/android_logo.jpg"
@@ -137,7 +137,7 @@ function Home() {
               </p>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300">
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition duration-300" style={{ animation: 'fadeInUp 0.6s ease-out 0.5s forwards', opacity: 0 }}>
               <div className="w-32 h-32 mx-auto mb-6 rounded-2xl flex items-center justify-center">
                 <img
                     src="/img/tablet_logo.jpg"
@@ -156,7 +156,7 @@ function Home() {
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s forwards', opacity: 0 }}>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Sửa chữa thiết bị di động của bạn ngay hôm nay!
             </h2>

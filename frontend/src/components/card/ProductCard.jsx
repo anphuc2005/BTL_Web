@@ -1,9 +1,21 @@
 import React from 'react'
-import '../styles/componentStyles/ProductCard.css'
+import { useNavigate } from 'react-router-dom'
+import '../../styles/componentStyles/ProductCard.css'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
+import { useFavorites } from '../../contexts/FavoritesContext'
 
 const ProductCard = ({ product, onAddToCart }) => {
-  const [isFavorite, setIsFavorite] = React.useState(false)
+  const navigate = useNavigate()
+  const { isFavorite, toggleFavorite } = useFavorites()
+
+  const handleProductDetailClick = () => {
+    navigate(`/productDetail/${product.id}`)
+  }
+
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation()
+    toggleFavorite(product.id)
+  }
 
   return (
     <div className="product-card">
@@ -13,13 +25,16 @@ const ProductCard = ({ product, onAddToCart }) => {
       
       <button 
         className="favorite-btn"
-        onClick={() => setIsFavorite(!isFavorite)}
+        onClick={handleFavoriteClick}
       >
-        {isFavorite ? <IoHeart /> : <IoHeartOutline />}
+        {!isFavorite(product.id) ? 
+          <img src="/icon/heart.svg" alt="Remove from favorites" /> : 
+          <img src="/icon/heart-filled.svg" alt="Add to favorites" />
+        }
       </button>
 
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <img src={product.image} alt={product.name} referrerPolicy="no-referrer" />
       </div>
 
       <div className="product-info">
@@ -42,12 +57,12 @@ const ProductCard = ({ product, onAddToCart }) => {
 
         <div className="product-pricing">
           {product.originalPrice && (
-            <span className="original-price">${product.originalPrice}</span>
+            <span className="original-price">{product.originalPrice}k</span>
           )}
-          <span className="current-price">${product.price}</span>
+          <span className="current-price">{product.price}k</span>
         </div>
 
-        <button className="add-to-cart-btn" onClick={() => onAddToCart(product)}>
+        <button className="add-to-cart-btn" onClick={handleProductDetailClick}>
           Xem chi tiết
         </button>
       </div>

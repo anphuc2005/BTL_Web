@@ -1,6 +1,6 @@
 import React from 'react'
-import AboutCard from './AboutCard'
-import '../styles/componentStyles/AboutSection.css'
+import AboutCard from '../card/AboutCard'
+import '../../styles/componentStyles/AboutSection.css'
 
 const AboutSection = () => {
   const leftColumnCards = [

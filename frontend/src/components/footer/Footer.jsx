@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Facebook from './FacebookLogo'
-import Instagram from './InstagramLogo'
-import Twitter from './TwitterLogo'
+import Facebook from '../footer_logo/FacebookLogo'
+import Instagram from '../footer_logo/InstagramLogo'
+import Twitter from '../footer_logo/TwitterLogo'
 
 export default function Footer() {
   const [email, setEmail] = useState('')

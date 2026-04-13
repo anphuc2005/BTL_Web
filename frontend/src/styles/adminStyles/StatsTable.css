@@ -1,0 +1,80 @@
+.statsTableCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e9edf3;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  margin-top: 18px;
+}
+
+.statsTableCard__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.statsTableCard__header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.statsTableCard__tableWrap {
+  overflow: auto;
+}
+
+.statsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statsTable thead th {
+  padding: 12px 20px;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.statsTable tbody td {
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 13px;
+  color: #334155;
+}
+
+.productMini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.productMini__img {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: #f1f5f9;
+}
+
+.productMini__name {
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 13px;
+}
+
+.productMini__sub {
+  font-size: 12px;
+  color: #22c55e;
+  margin-top: 2px;
+}
+
+.kpiUp {
+  color: #16a34a;
+  font-weight: 700;
+}
+.kpiDown {
+  color: #e11d48;
+  font-weight: 700;
+}

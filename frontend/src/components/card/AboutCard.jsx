@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/componentStyles/AboutCard.css'
+import '../../styles/componentStyles/AboutCard.css'
 
 const AboutCard = ({ 
   iconSrc, 
