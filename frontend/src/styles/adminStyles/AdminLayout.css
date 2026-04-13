@@ -1,0 +1,37 @@
+.adminLayout {
+  min-height: 100vh;
+  display: flex;
+  background: #f3f5f9;
+}
+
+.adminMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.adminContent {
+  padding: 22px 26px;
+  min-width: 0;
+}
+
+.admin-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f5f9;
+}
+
+.loading-spinner {
+  font-size: 18px;
+  color: #667eea;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .adminContent {
+    padding: 16px;
+  }
+}

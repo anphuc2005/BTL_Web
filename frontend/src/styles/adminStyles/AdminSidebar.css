@@ -1,0 +1,128 @@
+.adminSidebar {
+  width: 290px;
+  background: linear-gradient(180deg, #2c2f39 0%, #1f222a 100%);
+  color: #fff;
+  padding: 18px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.adminSidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.adminSidebar__dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.dot--pink { background: #ff4d9d; }
+.dot--purple { background: #8b5cf6; }
+.dot--blue { background: #22c3ff; }
+
+.adminSidebar__brandText {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.adminSidebar__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.adminSidebar__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.adminSidebar__profileMeta {
+  flex: 1;
+  min-width: 0;
+}
+.adminSidebar__name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.adminSidebar__role {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.adminSidebar__chev {
+  opacity: 0.7;
+}
+
+.adminSidebar__sectionTitle {
+  margin: 18px 10px 10px;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.adminSidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 6px;
+}
+
+.adminNavItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.adminNavItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.adminNavItem--active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.adminNavItem__icon {
+  width: 18px;
+  display: inline-flex;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.adminSidebar__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 16px 10px;
+}
+
+@media (max-width: 1024px) {
+  .adminSidebar {
+    display: none; /* bạn có thể làm kiểu collapsible sau */
+  }
+}

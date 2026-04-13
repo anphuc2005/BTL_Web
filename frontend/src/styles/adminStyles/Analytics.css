@@ -1,0 +1,272 @@
+.analyticsPage {
+  width: 100%;
+}
+
+/* Header section */
+.analyticsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.analyticsTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Period selector */
+.periodSelector {
+  display: flex;
+  gap: 8px;
+  background: #f8f9fa;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.periodBtn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.periodBtn:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.periodBtn--active {
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Stats grid - reuse class như Dashboard */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+/* Charts grid */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.chartSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chartEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+/* Stats info card */
+.statsInfo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.statsInfo__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statsInfo__item:last-child {
+  border-bottom: none;
+}
+
+.statsInfo__label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.statsInfo__value {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.statsInfo__value--success {
+  color: #22c55e;
+}
+
+.statsInfo__value--warning {
+  color: #f59e0b;
+}
+
+/* Loading state */
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Product mini (for table) */
+.productMini {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.productMini__img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.productMini__name {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.productMini__sub {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Revenue value */
+.revenueValue {
+  font-weight: 700;
+  color: #22c55e;
+  font-size: 14px;
+}
+
+/* No price text */
+.noPriceText {
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}
+
+/* Order code */
+.orderCode {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #3b82f6;
+  font-size: 13px;
+}
+
+/* Order type */
+.orderType {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Customer info */
+.customerName {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.customerPhone {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Status badge */
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.statusBadge--pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.statusBadge--confirmed {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.statusBadge--shipping {
+  background: #e0e7ff;
+  color: #6366f1;
+}
+
+.statusBadge--delivered {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.statusBadge--cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .analyticsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .periodSelector {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .periodBtn {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .analyticsTitle {
+    font-size: 20px;
+  }
+}
